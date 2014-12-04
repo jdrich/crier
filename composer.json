@@ -1,0 +1,19 @@
+{
+    "name": "jdrich/crier",
+    "description": "An Event Emitter",
+    "homepage": "https://github.com/jdrich/crier",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathan Rich",
+            "email": "jdrich@gmail.com",
+            "homepage": "http://jonathanri.ch"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Crier\\": "src/",
+            "Crier\\Tests\\": "tests/"
+        }
+    }
+}
