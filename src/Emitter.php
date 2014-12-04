@@ -27,7 +27,7 @@ class Emitter {
      * We override the call method to make emitting an event easier and also to
      * create the ability to create protected events.
      *
-     * To define a protected event, simply define a method
+     * To define a protected event, simply define a protected method which maps to the name of that event.
      */
     public function __call($name, $arguments) {
         $this->emit($this->formatEventName($name), $arguments);
