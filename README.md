@@ -1,0 +1,4 @@
+crier
+=====
+
+An Event Emitter
