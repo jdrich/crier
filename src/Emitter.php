@@ -83,17 +83,30 @@ class Emitter {
     protected function emit($event, $parameters = false) {
         $event = $this->formatEventName($event);
 
+        if(
+            !$this->notify($event, $parameters)
+            && !$this->defines($event)
+        ) {
+            throw new \InvalidArgumentException( 'No event found matching pattern: ' . $event );
+        }
+    }
+
+    protected function notify($event, $parameters) {
+        $notified = false;
+
         if(isset($this->listeners[$event])) {
             foreach($this->listeners[$event] as $listener) {
+                $notified = true;
+
                 if($parameters ) {
                     call_user_func_array($listener, $parameters);
                 } else {
                     $listener();
                 }
             }
-        } elseif(!$this->defines($event)) {
-            throw new \InvalidArgumentException( 'No event found matching pattern: ' . $event );
         }
+
+        return $notified;
     }
 
     /**
@@ -101,7 +114,7 @@ class Emitter {
      *
      * This method filters event names to conform to this restriction.
      */
-    private function formatEventName($event) {
+    protected function formatEventName($event) {
         $replacements = [
             '/[^\w.]/' => '',
             '/([a-z])([A-Z])/' => '$1.$2'
