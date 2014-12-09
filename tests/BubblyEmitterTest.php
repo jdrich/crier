@@ -28,4 +28,20 @@ class BubblyEmitterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(3, $three);
     }
+
+    public function testRootListener() {
+        $three = 4;
+
+        $crier = new BubblyEmitter('foo');
+        $crier->listener(
+            '.',
+            function () use (&$three) {
+                $three = 3;
+            }
+        );
+
+        $crier->fooBar();
+
+        $this->assertEquals(3, $three);
+    }
 }

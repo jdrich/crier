@@ -8,6 +8,8 @@ class BubblyEmitter extends Emitter {
 
         $root_event = $events[count($events) - 1];
 
+        $events[] = '.';
+
         if(!$this->defines($root_event)) {
             throw new \InvalidArgumentException( 'No event type found matching base event: ' . $root_event );
         }
